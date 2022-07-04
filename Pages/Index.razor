@@ -1,0 +1,23 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<div class="grid grid-cols-5 h-[400px]">
+    <Virtualize Items="TestList" Context="a">
+        <div class="p-5 bg-slate-500 rounded-lg shadow-lg">
+            <p>@a</p>
+        </div>
+    </Virtualize>
+</div>
+
+@code {
+    private List<string> TestList = new();
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+        for (int i = 0; i < 100; i++)
+            TestList.Add(Guid.NewGuid().ToString());
+    }
+}
